@@ -1,0 +1,19 @@
+{
+  "inputs": [
+    {
+      "type": "promptString",
+      "id": "testoptim-token",
+      "description": "TestOptim API key (starts with topt_)",
+      "password": true
+    }
+  ],
+  "servers": {
+    "testoptim": {
+      "type": "http",
+      "url": "https://api.testoptim.com/api/mcp",
+      "headers": {
+        "Authorization": "Bearer ${input:testoptim-token}"
+      }
+    }
+  }
+}

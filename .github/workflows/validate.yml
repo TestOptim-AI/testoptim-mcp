@@ -1,0 +1,39 @@
+name: Validate
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  server-json:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Validate server.json against the schema it declares
+        run: |
+          curl --silent --show-error --fail --location "$(jq -r '."$schema"' server.json)" -o server.schema.json
+          npx --yes --package ajv-cli@5 --package ajv-formats@3 \
+            ajv validate --spec=draft7 -c ajv-formats --strict=false -s server.schema.json -d server.json
+      - name: Validate server.json with the registry's own checks
+        run: |
+          curl --silent --show-error --fail --location "https://github.com/modelcontextprotocol/registry/releases/latest/download/mcp-publisher_linux_amd64.tar.gz" | tar xz mcp-publisher
+          ./mcp-publisher validate server.json
+      - name: Check the example configs are valid JSON
+        run: |
+          for f in examples/*.json; do jq empty "$f" && echo "ok $f"; done
+
+  links:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: lycheeverse/lychee-action@v2
+        with:
+          # The MCP endpoint answers 401 without a key, which is expected.
+          args: --exclude "^https://api\.testoptim\.com/" --accept "200..=299,429" README.md CONTRIBUTING.md

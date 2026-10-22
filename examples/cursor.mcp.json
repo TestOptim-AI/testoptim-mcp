@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "testoptim": {
+      "url": "https://api.testoptim.com/api/mcp",
+      "headers": {
+        "Authorization": "Bearer ${env:TESTOPTIM_TOKEN}"
+      }
+    }
+  }
+}

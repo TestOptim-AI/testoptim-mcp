@@ -1,0 +1,47 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.TestOptim-AI/testoptim",
+  "title": "TestOptim",
+  "description": "Run AI QA test runs on your web app and read the bugs they find, with steps to reproduce.",
+  "version": "1.0.0",
+  "websiteUrl": "https://www.testoptim.com/",
+  "repository": {
+    "url": "https://github.com/TestOptim-AI/testoptim-mcp",
+    "source": "github"
+  },
+  "icons": [
+    {
+      "src": "https://www.testoptim.com/icon.svg",
+      "mimeType": "image/svg+xml",
+      "sizes": ["any"]
+    },
+    {
+      "src": "https://www.testoptim.com/apple-icon.png",
+      "mimeType": "image/png",
+      "sizes": ["180x180"]
+    }
+  ],
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://api.testoptim.com/api/mcp",
+      "headers": [
+        {
+          "name": "Authorization",
+          "description": "Your TestOptim API key as a bearer token. Create one under Settings > API keys.",
+          "value": "Bearer {api_key}",
+          "isRequired": true,
+          "isSecret": true,
+          "variables": {
+            "api_key": {
+              "description": "TestOptim API key (starts with topt_)",
+              "placeholder": "topt_...",
+              "isRequired": true,
+              "isSecret": true
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
