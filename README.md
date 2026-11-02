@@ -1,3 +1,5 @@
+<p align="center"><img src="assets/logo.png" alt="TestOptim" width="96" height="96"></p>
+
 # TestOptim MCP server
 
 Connect Claude Code, Cursor, VS Code and other MCP clients to [TestOptim](https://www.testoptim.com/), so your AI assistant can run QA tests on your web app and read the issues they find.
@@ -159,11 +161,13 @@ The server only lists the tools your key's permissions allow, so a read-only key
 | Tool | Permission | What it does | Arguments |
 |---|---|---|---|
 | `list_projects` | `projects:read` | Lists the projects the key can access, to find the project ID the other tools need. | none |
-| `start_test_run` | `tests:run` | Starts a test run of the project's whole suite and returns the run ID. Runs take minutes. | `projectId` |
+| `start_test_run` | `tests:run` | Starts a test run and returns the run ID. Pass `changedAreas` to re-test only the pages or flows you just changed; leave it out for the whole suite. Runs take minutes. | `projectId`, `changedAreas` (e.g. `["/checkout", "/cart"]`; optional) |
 | `get_test_run` | `tests:read` | Shows a run's status (`pending`, `running`, `completed`, `failed`), progress, current step and issue counts by severity. | `testRunId` |
 | `stop_test_run` | `tests:run` | Stops a running test run, so no further test cases are executed and billed. A stopped run reports as `failed`. | `testRunId` |
-| `list_issues` | `issues:read` | Lists a project's issues as summaries: ID, title, severity, category, status. | `projectId`, `severity` (`critical`, `high`, `medium` or `low`; optional), `limit` (1-100, default 20) |
+| `list_issues` | `issues:read` | Lists a project's issues as summaries: ID, title, severity, category, status. Pass `testRunId` for only what one run found. | `projectId`, `severity` (`critical`, `high`, `medium` or `low`; optional), `testRunId` (optional), `limit` (1-100, default 20) |
 | `get_issue` | `issues:read` | Gets one issue in full: description, steps to reproduce, expected and actual behaviour, page URL and screenshot. | `issueId` |
+| `start_exploration` | `knowledge:explore` | Explores the project's app so TestOptim learns new or changed pages and flows. Spends the plan's page allowance and replaces an exploration already running. Returns an exploration ID. | `projectId` |
+| `get_exploration` | `projects:read` | Shows an exploration's status, progress and, once it ends, how many pages, flows and entities it recorded. `waiting_otp_ready` or `waiting_otp` means the login needs a one-time code entered in the TestOptim app. | `explorationId` |
 
 Results come back as JSON text, using the same field names as the [TestOptim API](https://www.testoptim.com/docs/integrations/run-tests-from-ci-with-an-api-key).
 
@@ -173,6 +177,8 @@ Results come back as JSON text, using the same field names as the [TestOptim API
 - "Run the QA suite on the checkout project and tell me when it's done."
 - "List the critical and high issues on my project, then show the steps to reproduce the first one."
 - "I just changed the signup form. Run the tests, and if anything fails, open the issue and fix the code."
+- "I changed /checkout. Re-test only that with TestOptim and fix any critical issues."
+- "I added a settings page. Explore the app again so TestOptim picks it up."
 - "Stop the test run you started; it's on the wrong project."
 
 ## Security

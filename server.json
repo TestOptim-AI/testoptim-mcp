@@ -19,6 +19,11 @@
       "src": "https://www.testoptim.com/apple-icon.png",
       "mimeType": "image/png",
       "sizes": ["180x180"]
+    },
+    {
+      "src": "https://www.testoptim.com/logo.png",
+      "mimeType": "image/png",
+      "sizes": ["512x512"]
     }
   ],
   "remotes": [
