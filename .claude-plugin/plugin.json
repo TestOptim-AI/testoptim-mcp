@@ -1,7 +1,7 @@
 {
   "name": "testoptim",
   "displayName": "TestOptim",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Run AI QA tests on your web app from your coding agent, read the bugs they find, and re-test what you changed.",
   "author": {
     "name": "TestOptim",
@@ -24,5 +24,14 @@
   "documentationUrl": "https://github.com/TestOptim-AI/testoptim-mcp#readme",
   "supportUrl": "https://www.testoptim.com/contact",
   "privacyPolicyUrl": "https://www.testoptim.com/privacy",
-  "termsOfServiceUrl": "https://www.testoptim.com/terms"
+  "termsOfServiceUrl": "https://www.testoptim.com/terms",
+  "userConfig": {
+    "api_key": {
+      "type": "string",
+      "title": "TestOptim API key",
+      "description": "Create one in TestOptim under Settings > API keys. It starts with topt_. Claude Code keeps it in your system's secure credential store.",
+      "sensitive": true,
+      "required": true
+    }
+  }
 }

@@ -157,11 +157,11 @@ Any client that supports Streamable HTTP with custom headers works. Point it at 
 
 ## Agent skill and Claude Code plugin
 
-The [`testoptim-qa`](skills/testoptim-qa/SKILL.md) skill teaches your coding agent the loop: after it changes a page or flow, it re-tests only that area, reads the critical and high issues, fixes them and re-tests. It follows the open [Agent Skills](https://agentskills.io) format, so it works in Claude Code, Codex, Cursor, Copilot and other agents that read `SKILL.md`. Export `TESTOPTIM_TOKEN` first (see [Create an API key](#create-an-api-key)).
+The [`testoptim-qa`](skills/testoptim-qa/SKILL.md) skill teaches your coding agent the loop: after it changes a page or flow, it re-tests only that area, reads the critical and high issues, fixes them and re-tests. It asks you before every run, because runs use your plan's executions. It follows the open [Agent Skills](https://agentskills.io) format, so it works in Claude Code, Codex, Cursor, Copilot and other agents that read `SKILL.md`.
 
 ### Claude Code plugin
 
-The plugin installs the skill and connects the MCP server in one step:
+The plugin installs the skill and connects the MCP server in one step. When you enable it, Claude Code asks for your [API key](#create-an-api-key) and keeps it in your system's secure credential store, so you don't need `TESTOPTIM_TOKEN`:
 
 ```
 /plugin install testoptim --marketplace TestOptim-AI/testoptim-mcp
