@@ -1,0 +1,16 @@
+{
+  "name": "testoptim",
+  "description": "TestOptim's Claude Code plugin: AI QA tests for your web app, run from your coding agent.",
+  "owner": {
+    "name": "TestOptim",
+    "email": "hi@testoptim.com",
+    "url": "https://www.testoptim.com/"
+  },
+  "plugins": [
+    {
+      "name": "testoptim",
+      "source": "./",
+      "description": "Run AI QA tests on your web app from your coding agent, read the bugs they find, and re-test what you changed."
+    }
+  ]
+}

@@ -17,6 +17,7 @@ TestOptim hosts the server; there is nothing to install or run. This repository 
 - [Before you start](#before-you-start)
 - [Create an API key](#create-an-api-key)
 - [Connect your client](#connect-your-client)
+- [Agent skill and Claude Code plugin](#agent-skill-and-claude-code-plugin)
 - [Tools](#tools)
 - [Example prompts](#example-prompts)
 - [Security](#security)
@@ -153,6 +154,33 @@ On Team and Enterprise plans an Owner adds it under **Organization settings** > 
 ### Other clients
 
 Any client that supports Streamable HTTP with custom headers works. Point it at `https://api.testoptim.com/api/mcp` and send `Authorization: Bearer <your key>` on every request. The server is stateless: it doesn't issue session IDs, and it answers `GET` and `DELETE` with `405`.
+
+## Agent skill and Claude Code plugin
+
+The [`testoptim-qa`](skills/testoptim-qa/SKILL.md) skill teaches your coding agent the loop: after it changes a page or flow, it re-tests only that area, reads the critical and high issues, fixes them and re-tests. It follows the open [Agent Skills](https://agentskills.io) format, so it works in Claude Code, Codex, Cursor, Copilot and other agents that read `SKILL.md`. Export `TESTOPTIM_TOKEN` first (see [Create an API key](#create-an-api-key)).
+
+### Claude Code plugin
+
+The plugin installs the skill and connects the MCP server in one step:
+
+```
+/plugin install testoptim --marketplace TestOptim-AI/testoptim-mcp
+```
+
+On Claude Code older than 2.1.275, add the marketplace first:
+
+```
+/plugin marketplace add TestOptim-AI/testoptim-mcp
+/plugin install testoptim@testoptim
+```
+
+### Other agents
+
+Install the skill with the [`skills`](https://skills.sh) CLI, then connect the MCP server as shown in [Connect your client](#connect-your-client):
+
+```bash
+npx skills add TestOptim-AI/testoptim-mcp
+```
 
 ## Tools
 

@@ -1,0 +1,28 @@
+{
+  "name": "testoptim",
+  "displayName": "TestOptim",
+  "version": "1.0.0",
+  "description": "Run AI QA tests on your web app from your coding agent, read the bugs they find, and re-test what you changed.",
+  "author": {
+    "name": "TestOptim",
+    "email": "hi@testoptim.com",
+    "url": "https://www.testoptim.com/"
+  },
+  "homepage": "https://www.testoptim.com/verify-coding-agent-changes",
+  "repository": "https://github.com/TestOptim-AI/testoptim-mcp",
+  "license": "MIT",
+  "keywords": [
+    "qa",
+    "testing",
+    "e2e",
+    "test-automation",
+    "bug-reports",
+    "ai-qa",
+    "mcp"
+  ],
+  "icon": "./assets/logo.png",
+  "documentationUrl": "https://github.com/TestOptim-AI/testoptim-mcp#readme",
+  "supportUrl": "https://www.testoptim.com/contact",
+  "privacyPolicyUrl": "https://www.testoptim.com/privacy",
+  "termsOfServiceUrl": "https://www.testoptim.com/terms"
+}
