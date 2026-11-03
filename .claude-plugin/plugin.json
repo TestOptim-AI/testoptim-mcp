@@ -1,7 +1,7 @@
 {
   "name": "testoptim",
   "displayName": "TestOptim",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Run AI QA tests on your web app from your coding agent, read the bugs they find, and re-test what you changed.",
   "author": {
     "name": "TestOptim",

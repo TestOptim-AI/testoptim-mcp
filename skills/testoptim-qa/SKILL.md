@@ -17,7 +17,7 @@ If they are missing, tell the user how to connect, then stop:
 1. In TestOptim, open **Settings > API keys**, create a key, and copy it. It starts with `topt_` and is shown once.
 2. Connect the server:
    - Claude Code: install the plugin with `/plugin install testoptim --marketplace TestOptim-AI/testoptim-mcp`. Claude Code asks for the key and keeps it in the system's secure credential store.
-   - Other clients: export the key in the shell that starts the agent (`export TESTOPTIM_TOKEN="topt_..."`) and add the server as shown in https://github.com/TestOptim-AI/testoptim-mcp#connect-your-client
+   - Other clients: the user adds the server with their key as shown in https://github.com/TestOptim-AI/testoptim-mcp#connect-your-client
 3. Restart the agent.
 
 Never ask the user to paste the key into the chat, and never write it into a file you commit.
@@ -59,7 +59,7 @@ If you added a page or a flow that the suite does not know yet, ask the user bef
 
 | Error | What to do |
 |---|---|
-| `401 Missing API token` or `401 Invalid API token` | The key is not set or is wrong. Ask the user to fix `TESTOPTIM_TOKEN` and restart the agent. |
+| `401 Missing API token` or `401 Invalid API token` | The key is not set or is wrong. In Claude Code, ask the user to run `/plugin configure testoptim@testoptim` and enter a valid key. In other clients, ask them to fix the key in their MCP setup. Then restart the agent. |
 | A tool is missing | The key lacks that permission (for example `tests:run`). Ask the user for a key that has it. |
 | Another job is already in progress | A project runs one job at a time. Wait for it with `get_test_run` or `get_exploration`, then try again. |
 | `totalCases` is lower than expected | The run was trimmed to the executions left on the plan. Tell the user. |
