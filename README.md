@@ -2,6 +2,8 @@
 
 # TestOptim MCP server
 
+[![AllMCPs Verified](https://allmcps.com/api/badge/testoptim)](https://allmcps.com/mcp/testoptim?verify=3456f92e-772e-4f53-b042-865e2d3dc909)
+
 Connect Claude Code, Cursor, VS Code and other MCP clients to [TestOptim](https://www.testoptim.com/), so your AI assistant can run QA tests on your web app and read the issues they find.
 
 > "Run the QA suite on my project and show me the critical issues."
