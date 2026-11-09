@@ -8,8 +8,11 @@ Connect Claude Code, Cursor, VS Code and other MCP clients to [TestOptim](https:
 
 > "Run the QA suite on my project and show me the critical issues."
 
-TestOptim hosts the server; there is nothing to install or run. This repository holds the setup instructions, ready-to-copy client configs, and the [`server.json`](server.json) that lists the server in MCP registries.
+TestOptim is an AI QA platform: it explores your web app, writes test cases, runs them in a real browser and reports the bugs it finds. Learn more at [https://testoptim.com](https://testoptim.com).
 
+TestOptim hosts the server; there is nothing to install or run. This repository holds the setup instructions, ready-to-copy client configs, the [`server.json`](server.json) that lists the server in MCP registries, and the [`lhm.plugin.json`](lhm.plugin.json) manifest for the [LobeHub MCP marketplace](https://lobehub.com/mcp).
+
+- **Website:** [https://testoptim.com](https://testoptim.com)
 - **Endpoint:** `https://api.testoptim.com/api/mcp`
 - **Transport:** Streamable HTTP (stateless; `POST` only)
 - **Auth:** a TestOptim API key, sent as `Authorization: Bearer topt_...`
@@ -241,4 +244,4 @@ Spotted an outdated client config, or want to add one for another client? See [C
 
 ## License
 
-[MIT](LICENSE)
+[MIT](LICENSE). TestOptim is at [https://testoptim.com](https://testoptim.com).

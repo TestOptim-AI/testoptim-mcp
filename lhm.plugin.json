@@ -1,0 +1,204 @@
+{
+  "identifier": "testoptim-ai-testoptim-mcp",
+  "name": "TestOptim",
+  "version": "1.0.0",
+  "description": "Run AI QA test runs on your web app from your coding agent with TestOptim (https://testoptim.com), and read the bugs they find, with steps to reproduce.",
+  "author": "TestOptim",
+  "authorUrl": "https://github.com/TestOptim-AI",
+  "homepage": "https://testoptim.com",
+  "cloudEndpoint": "https://api.testoptim.com/api/mcp",
+  "category": "developer",
+  "icon": "https://www.testoptim.com/icon.svg",
+  "tags": [
+    "testing",
+    "qa",
+    "ai-testing",
+    "test-automation",
+    "bug-reports",
+    "web-apps",
+    "developer-tools"
+  ],
+  "tools": [
+    {
+      "name": "list_projects",
+      "description": "List the QA projects this token can access. Use it to find the project id the other tools need.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {},
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      },
+      "execution": {
+        "taskSupport": "forbidden"
+      }
+    },
+    {
+      "name": "start_test_run",
+      "description": "Start a QA test run against a project. Pass changedAreas to re-test only the pages or flows you just changed; omit it for the full suite. Returns a run id - poll get_test_run for the outcome. Runs take minutes, so do not poll in a tight loop.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "projectId": {
+            "type": "string",
+            "description": "The project to test"
+          },
+          "changedAreas": {
+            "description": "Run only the tests covering these pages or flows, e.g. [\"/checkout\", \"/cart\"]: the parts of the app you just changed. Omit to run the full suite.",
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        },
+        "required": [
+          "projectId"
+        ],
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      },
+      "execution": {
+        "taskSupport": "forbidden"
+      }
+    },
+    {
+      "name": "get_test_run",
+      "description": "Check a test run: whether it is still running, and how many issues it found.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "testRunId": {
+            "type": "string",
+            "description": "The run _id returned by start_test_run"
+          }
+        },
+        "required": [
+          "testRunId"
+        ],
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      },
+      "execution": {
+        "taskSupport": "forbidden"
+      }
+    },
+    {
+      "name": "stop_test_run",
+      "description": "Stop a running test run. Use it when a run was started against the wrong project, or is no longer needed - every test case it would still execute is billed.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "testRunId": {
+            "type": "string",
+            "description": "The run to stop"
+          }
+        },
+        "required": [
+          "testRunId"
+        ],
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      },
+      "execution": {
+        "taskSupport": "forbidden"
+      }
+    },
+    {
+      "name": "list_issues",
+      "description": "List QA issues in a project as short summaries - id, title, severity, status. Pass testRunId for only what one run found, or filter by severity to triage. Call get_issue for the full detail of one issue.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "projectId": {
+            "type": "string",
+            "description": "The project to read issues from"
+          },
+          "severity": {
+            "description": "Only return issues of this severity",
+            "type": "string",
+            "enum": [
+              "critical",
+              "high",
+              "medium",
+              "low"
+            ]
+          },
+          "testRunId": {
+            "description": "Only return the issues this test run found",
+            "type": "string",
+            "pattern": "^[a-f\\d]{24}$"
+          },
+          "limit": {
+            "description": "How many to return (default 20)",
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 100
+          }
+        },
+        "required": [
+          "projectId"
+        ],
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      },
+      "execution": {
+        "taskSupport": "forbidden"
+      }
+    },
+    {
+      "name": "get_issue",
+      "description": "Get one issue in full: description, steps to reproduce, expected vs actual behaviour, page URL and screenshot. Use after list_issues to dig into a specific issue.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "issueId": {
+            "type": "string",
+            "description": "The issue _id returned by list_issues"
+          }
+        },
+        "required": [
+          "issueId"
+        ],
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      },
+      "execution": {
+        "taskSupport": "forbidden"
+      }
+    },
+    {
+      "name": "start_exploration",
+      "description": "Explore the project's app so TestOptim learns new or changed pages and flows. Use it after adding pages, before start_test_run; tests for what it finds are generated and approved in the TestOptim app. Spends the plan's page allowance and replaces an exploration already running. Returns an exploration id - poll get_exploration, which takes minutes.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "projectId": {
+            "type": "string",
+            "description": "The project whose app to explore"
+          }
+        },
+        "required": [
+          "projectId"
+        ],
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      },
+      "execution": {
+        "taskSupport": "forbidden"
+      }
+    },
+    {
+      "name": "get_exploration",
+      "description": "Check an exploration: its status, progress and, once it has ended, how many pages and flows it recorded. waiting_otp_ready or waiting_otp means the login needs a one-time code entered in the TestOptim app.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "explorationId": {
+            "type": "string",
+            "description": "The exploration _id returned by start_exploration"
+          }
+        },
+        "required": [
+          "explorationId"
+        ],
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      },
+      "execution": {
+        "taskSupport": "forbidden"
+      }
+    }
+  ]
+}
