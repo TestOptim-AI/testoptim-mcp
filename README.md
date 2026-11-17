@@ -15,11 +15,12 @@ TestOptim hosts the server; there is nothing to install or run. This repository 
 - **Website:** [https://testoptim.com](https://testoptim.com)
 - **Endpoint:** `https://api.testoptim.com/api/mcp`
 - **Transport:** Streamable HTTP (stateless; `POST` only)
-- **Auth:** a TestOptim API key, sent as `Authorization: Bearer topt_...`
+- **Auth:** sign in with OAuth, or use an API key (`Authorization: Bearer topt_...`)
 
 ## Contents
 
 - [Before you start](#before-you-start)
+- [Sign in with OAuth](#sign-in-with-oauth)
 - [Create an API key](#create-an-api-key)
 - [Connect your client](#connect-your-client)
 - [Agent skill and Claude Code plugin](#agent-skill-and-claude-code-plugin)
@@ -32,8 +33,18 @@ TestOptim hosts the server; there is nothing to install or run. This repository 
 ## Before you start
 
 - A TestOptim account with at least one project that has generated test cases. See [Generate test cases](https://www.testoptim.com/docs/test-cases/generate-test-cases).
-- The **Owner** or **Admin** role in your organization, to create API keys.
-- Runs started over MCP use your plan's test executions, the same as runs started in the app. They are attributed to the person who created the key.
+- The **Owner** or **Admin** role in your organization, to create API keys or to approve an OAuth sign-in.
+- Runs started over MCP use your plan's test executions, the same as runs started in the app. They are attributed to the person who created the key or approved the sign-in.
+
+## Sign in with OAuth
+
+If your MCP client supports OAuth sign-in for remote servers, you don't need an API key. Add the server with only its URL, `https://api.testoptim.com/api/mcp`, and no `Authorization` header. The client finds the sign-in details on its own:
+
+1. The client opens TestOptim in your browser.
+2. Sign in to TestOptim, then approve the access the client asks for.
+3. The client stores the token and connects. The tools work the same as with an API key.
+
+Only members who may create API keys (Owner or Admin) can approve. To stop a client's access, sign it out in the client or remove the server. If your client does not support OAuth sign-in, use an API key and the snippets below.
 
 ## Create an API key
 
